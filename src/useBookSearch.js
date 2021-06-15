@@ -34,7 +34,7 @@ const UseBookSearch = (query, pageNumber) => {
             setError(true)
         })
 
-        return () => cancel();   //this is used to render the last data only
+        return () => cancel();   //cancels all the other previous response and returns only the last one
 
     }, [query, pageNumber])
 

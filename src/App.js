@@ -10,6 +10,7 @@ const App = () => {
 
     const observer = useRef()
     const lastBookElementRef = useCallback((node) => {
+        //console.log('lastBookRef Callback : ', node)
         if (loading) return;
         if (observer.current) observer.current.disconnect()
         observer.current = new IntersectionObserver((entries) => {
@@ -18,7 +19,6 @@ const App = () => {
             //console.log('visible')
         })
         if (node) observer.current.observe(node);
-        //console.log('lastBookRef Callback : ', node)
     }, [loading, hasMore])
 
     const handleSearch = (e) => {
