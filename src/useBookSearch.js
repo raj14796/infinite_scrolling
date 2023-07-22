@@ -8,9 +8,9 @@ const UseBookSearch = (query, pageNumber) => {
     const [books, setBooks] = useState([])
     const [hasMore, setHasMore] = useState(false)
 
-    useEffect(()=>{
+    useEffect(() => {
         setBooks([])
-    },[query])
+    }, [query])
 
     useEffect(() => {
         setLoading(true)
@@ -22,7 +22,8 @@ const UseBookSearch = (query, pageNumber) => {
             params: { q: query, page: pageNumber },
             cancelToken: new axios.CancelToken((c) => cancel = c)
         }).then((res) => {
-            const newBooks = res.data.docs.map((b) => b.title)
+            let newBooks = res.data.docs.map((b) => b.title)
+            newBooks = newBooks.map(aBook => aBook.toLowerCase().replaceAll(query.toLowerCase(), `<span class='highlight-text'>${query}</span>`));
             setBooks((prevBooks) => {
                 return [...new Set([...prevBooks, ...newBooks])]       ///Set is used to find the unique elements
             })

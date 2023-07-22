@@ -1,5 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react'
 import useBookSearch from './useBookSearch'
+import './style.css'
 
 const App = () => {
 
@@ -32,9 +33,9 @@ const App = () => {
             {
                 books.map((aBook, index) => {
                     if (index === books.length - 1)
-                        return <div ref={lastBookElementRef} key={aBook}>{aBook}</div>
+                        return <div ref={lastBookElementRef} key={aBook} dangerouslySetInnerHTML={{ __html: aBook }} />
                     else
-                        return <div key={aBook}>{aBook}</div>
+                        return <div key={aBook} dangerouslySetInnerHTML={{ __html: aBook }} />
                 })
             }
             {loading && <div>Loading...</div>}
